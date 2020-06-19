@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import CommentForm from './CommentForm';
 
 function RenderDish({ dish }) {
     const dishdetail = dish;
@@ -23,22 +24,30 @@ function RenderDish({ dish }) {
 
 function RenderComments({ comments }) {
     console.log(comments);
+    const displayComments = comments.map((item)=>{
+        console.log(item.comment);
+        return(
+            <div key={item.id}>
+            <ul className="list-unstyled">
+                <li>{item.comment}</li>
+                <li>-- {item.author}</li>
+            </ul>
+        </div>
+        
+        )
+        
+    });
+    
     if (comments === undefined)
         return (
             <div></div>
         ); else
-        return comments.map((item) => {
-            return (
-                <>
-                    <div key={item.id}>
-                        <ul className="list-unstyled">
-                            <li>{item.comment}</li>
-                            <li>-- {item.author},{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(item.date)))}</li>
-                        </ul>
-                    </div>
-                </>
-            );
-        });
+        return (
+         <div>
+         {displayComments}
+         <CommentForm/>
+         </div>
+        );
 }
 
 
@@ -64,6 +73,7 @@ const DishDetail = (props) => {
                 <div className="col-12 col-md-5 m-1">
                     <h4>Comments</h4>
                     <RenderComments comments={props.comments} />
+
                 </div>
             </div>
         </div>
