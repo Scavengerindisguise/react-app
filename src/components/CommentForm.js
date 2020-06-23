@@ -8,6 +8,7 @@ const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len); 
 
 class CommentForm extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -25,9 +26,9 @@ class CommentForm extends Component {
     }
 
     handleSubmit(values) {
-        this.toggleModal();
-        console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
+        this.toggleModal(); 
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.message);
+        console.log(values);
         
     }
     render() {
@@ -42,7 +43,7 @@ class CommentForm extends Component {
                         <Row className="form-group">
                         <Label htmlFor="rating" md={2}>Rating</Label>
                         
-                          <Control.select model=".rating" name="rating"
+                          <Control.select model=".rating" id ="rating" name="rating"
                                         className="form-control">
                                         <option>1</option>
                                         <option>2</option>
