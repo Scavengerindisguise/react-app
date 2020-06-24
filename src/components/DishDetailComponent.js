@@ -24,29 +24,29 @@ function RenderDish({ dish }) {
 
 function RenderComments({ comments, addComment, dishId }) {
     console.log(comments);
-    const displayComments = comments.map((item)=>{
+    const displayComments = comments.map((item) => {
         console.log(item.comment);
-        return(
+        return (
             <div key={item.id}>
-            <ul className="list-unstyled">
-                <li>{item.comment}</li>
-                <li>-- {item.author}</li>
-            </ul>
-        </div>
-        
+                <ul className="list-unstyled">
+                    <li>{item.comment}</li>
+                    <li>-- {item.author},{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(item.date)))}</li>
+                </ul>
+            </div>
+
         )
-        
+
     });
-    
+
     if (comments === undefined)
         return (
             <div></div>
         ); else
         return (
-         <div>
-         {displayComments}
-         <CommentForm dishId={dishId} addComment={addComment} />
-         </div>
+            <div>
+                {displayComments}
+                <CommentForm dishId={dishId} addComment={addComment} />
+            </div>
         );
 }
 
@@ -73,7 +73,7 @@ const DishDetail = (props) => {
                 <div className="col-12 col-md-5 m-1">
                     <h4>Comments</h4>
                     <RenderComments comments={props.comments} addComment={props.addComment}
-        dishId={props.dish.id}/>
+                        dishId={props.dish.id} />
 
                 </div>
             </div>
