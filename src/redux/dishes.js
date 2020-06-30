@@ -3,6 +3,7 @@ import * as ActionTypes from './ActionTypes';
 export const Dishes = (state = { isLoading: true,
     errMess: null,
     dishes:[]}, action) => {
+        console.log(state.dishes);
     switch (action.type) {
         case ActionTypes.ADD_DISHES:
             return {...state, isLoading: false, errMess: null, dishes: action.payload};
